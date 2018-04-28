@@ -82,9 +82,6 @@ echo "./preseed.cfg" | fakeroot cpio -o -H newc -A -F "./initrd"
 find "./custom" | fakeroot cpio -o -H newc -A -F "./initrd"
 cat "./initrd" | gzip -9c > "$TMP_DISC_DIR/initrd.gz"
 
-# copy init script to initrd image
-#echo "./init-host.sh" | fakeroot cpio -o -H newc -A -F "./initrd"
-
 # build iso
 cd "$TMP_DISC_DIR"
 rm -r '[BOOT]'
