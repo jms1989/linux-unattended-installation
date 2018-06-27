@@ -45,10 +45,14 @@ apt -y update
 apt -y -o Dpkg::Options::="--force-confold" upgrade
 apt -y autoremove
 apt -y purge
+apt -y install python3-pip python3-dev
+
+# install The Fuck python package
+pip3 install thefuck
 
 # start user script
-username="$(getent passwd 1000 | cut -d: -f1)"
-sh -c "./init-user-home.sh" - "$username"
+firstuser="$(getent passwd 1000 | cut -d: -f1)"
+sudo -u "$firstuser" -i "./init-user-home.sh"
 
 # remove myself to prevent any unintended changes at a later stage
 sed -i '10,12d' /root/.profile

@@ -36,6 +36,7 @@ mkdir "./custom"
 cp "$SCRIPT_DIR/custom/preseed.cfg" "./preseed.cfg"
 cp "$SSH_PUBLIC_KEY_FILE" "./custom/userkey.pub"
 cp "$SCRIPT_DIR/custom/ssh-host-keygen.service" "./custom/ssh-host-keygen.service"
+cp "$SCRIPT_DIR/custom/init-user-home.sh" "./custom/init-user-home.sh"
 cp "$SCRIPT_DIR/custom/init-host.sh" "./custom/init-host.sh"
 
 # do some timezone stuff
