@@ -96,4 +96,4 @@ rm -r "$TMP_DISC_DIR"
 rm -r "$TMP_INITRD_DIR"
 
 # done
-echo "Next steps: install system, login via root, adjust the authorized keys, set a root password (if you want to), deploy via ansible (if applicable), enjoy!"
+echo "Next steps: install system, login via root, follow on-screen instructions, let it process and reboot, login as regular user with preconfigure keys, profit!"

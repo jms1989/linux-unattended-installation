@@ -46,6 +46,10 @@ apt -y -o Dpkg::Options::="--force-confold" upgrade
 apt -y autoremove
 apt -y purge
 
+# start user script
+username="$(getent passwd 1000 | cut -d: -f1)"
+sh -c "./init-user-home.sh" - "$username"
+
 # remove myself to prevent any unintended changes at a later stage
 sed -i '10,12d' /root/.profile
 rm $0
