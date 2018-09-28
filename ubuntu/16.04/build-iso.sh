@@ -5,6 +5,7 @@ set -e
 SSH_PUBLIC_KEY_FILE=${1:-"$HOME/.ssh/authorized_keys"}
 TARGET_ISO=${2:-"`pwd`/ubuntu-16.04-netboot-amd64-unattended.iso"}
 hostname="ubuntu"
+username="$USER"
 
 # check if ssh key exists
 if [ ! -f "$SSH_PUBLIC_KEY_FILE" ];
@@ -19,6 +20,9 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TMP_DOWNLOAD_DIR="`mktemp -d`"
 TMP_DISC_DIR="`mktemp -d`"
 TMP_INITRD_DIR="`mktemp -d`"
+
+# Password file
+passwdfile=${3:-"$CURRENT_DIR/passwd"}
 
 # download and extract netboot iso
 SOURCE_ISO_URL="http://mirror.lstn.net/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/mini.iso"
@@ -49,22 +53,26 @@ else
   timezone=`find /usr/share/zoneinfo/ -type f -exec md5sum {} \; | grep "^$checksum" | sed "s/.*\/usr\/share\/zoneinfo\///" | head -n 1`
 fi
 
+# Read password file and if it doesn't exist, ask for one.
+if [[ -f "$passwdfile" && -s "$passwdfile" ]]; then
+        password=$(<$passwdfile)
+else
+        read -sp " please enter your preferred password: " password
+        printf "\n"
+        read -sp " confirm your preferred password: " password2
+
+        # check if the passwords match to prevent headaches
+        if [[ "$password" != "$password2" ]]; then
+            echo " your passwords do not match; please restart the script and try again"
+            echo
+            exit
+        fi
+fi
+
 # ask the user questions about his/her preferences
 #read -ep " please enter your preferred timezone: " -i "${timezone}" timezone
-read -ep " please enter your preferred username: " -i "michael" username
-read -sp " please enter your preferred password: " password
-printf "\n"
-read -sp " confirm your preferred password: " password2
-#printf "\n"
 #read -ep " Make ISO bootable via USB: " -i "no" bootable
 echo;
-
-# check if the passwords match to prevent headaches
-if [[ "$password" != "$password2" ]]; then
-    echo " your passwords do not match; please restart the script and try again"
-    echo
-    exit
-fi
 
 # generate the password hash
 pwhash=$(echo $password | mkpasswd -s -m sha-512)
