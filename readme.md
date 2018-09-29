@@ -2,6 +2,8 @@
 
 This project provides all you need to create an unattended installation of a minimal setup of Linux, whereas *minimal* translates to the most lightweight setup - including an OpenSSH service and Python - which you can derive from the standard installer of a Linux distribution. The idea is, you will do all further deployment of your configurations and services with the help of Ansible or similar tools once you completed the minimal setup.
 
+The `preseed.cfg` file currently auto installs openssh-server, nano, htop, screen, git, curl, and open-vm-tools to the machine.
+
 ## Ubuntu 16.04 LTS and 18.04 LTS
 
 Use the `build-iso.sh` script to create an ISO file based on the netsetup image of Ubuntu.
