@@ -17,7 +17,7 @@ OS="Ubuntu_16"
 
 # create iso
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-TMP_ISO_DIR="/home/michael/vm" #"`mktemp -d`"
+TMP_ISO_DIR="$HOME" #"`mktemp -d`"
 
 if [ ! -d "$TMP_ISO_DIR" ]; then
         mkdir "$TMP_ISO_DIR"
