@@ -2,10 +2,10 @@
 set -e
 
 # set defaults
-default_hostname="$(hostname)"
-default_domain="sanlan"
+default_hostname="`hostname -s`"
+default_domain="`hostname -d`"
 tmp="/root/"
-username="$(logname)"
+username="`logname`"
 
 clear
 
@@ -41,14 +41,20 @@ sed -i "s@ubuntu@$hostname@g" /etc/hosts
 hostname "$hostname"
 
 # update repos
-apt -y update
-apt -y -o Dpkg::Options::="--force-confold" upgrade
-apt -y autoremove
-apt -y purge
-apt -y install python3-pip python3-dev
+apt-get -y update
+apt-get -y -o Dpkg::Options::="--force-confold" upgrade
+apt-get -y autoremove
+apt-get -y purge
+#apt-get -y install python3-pip python3-dev
 
 # install The Fuck python package
-pip3 install thefuck
+#pip3 install thefuck
+
+# Disable all Default Motd.d scripts except the header
+# Default Scripts
+# 00-header  10-help-text  50-motd-news  80-esm  80-livepatch  91-release-upgrade
+
+chmod -x /etc/update-motd.d/{10..99}* 2&>/dev/null
 
 # start user script
 firstuser="$(getent passwd 1000 | cut -d: -f1)"
