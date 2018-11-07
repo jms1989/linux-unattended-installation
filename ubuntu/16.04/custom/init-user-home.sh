@@ -1,8 +1,1 @@
-#!/bin/bash
-echo "Clone dotfiles repository from GitHub"
-git clone https://github.com/jms1989/dotfiles.git ~/.dotfiles
-bash ~/.dotfiles/install.sh
-echo "done."
-rm -f $0
-exit
-
+../../../ubuntu/18.04/custom/init-user-home.sh

@@ -1,11 +1,1 @@
-[Unit]
-Description=OpenSSH Server Key Generation
-Before=ssh.service
-
-[Service]
-ExecStart=/usr/bin/ssh-keygen -A
-Type=oneshot
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
+../../../ubuntu/18.04/custom/ssh-host-keygen.service
