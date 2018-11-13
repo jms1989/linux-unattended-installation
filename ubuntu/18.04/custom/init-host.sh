@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+#set -e
 
 # set defaults
 default_hostname="`hostname -s`"
@@ -54,7 +54,7 @@ apt-get -y purge
 # Default Scripts
 # 00-header  10-help-text  50-motd-news  80-esm  80-livepatch  91-release-upgrade
 
-chmod -x /etc/update-motd.d/{10..99}* 2&>/dev/null
+chmod -x --quiet /etc/update-motd.d/{10..99}* 
 
 # start user script
 firstuser="$(getent passwd 1000 | cut -d: -f1)"
