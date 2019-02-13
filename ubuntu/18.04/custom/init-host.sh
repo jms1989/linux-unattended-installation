@@ -6,6 +6,7 @@ default_hostname="`hostname -s`"
 default_domain="`hostname -d`"
 tmp="/root/"
 username="`logname`"
+timezone="America/Chicago"
 
 clear
 
@@ -55,6 +56,13 @@ apt-get -y purge
 # 00-header  10-help-text  50-motd-news  80-esm  80-livepatch  91-release-upgrade
 
 chmod -x --quiet /etc/update-motd.d/{10..99}* 
+
+# Set timezone
+cp /usr/share/zoneinfo/"{$timezone}" /etc/localtime
+
+# Reduce log retention rate of journald
+echo "MaxRetentionSec=1day" >> /etc/systemd/journald.conf
+echo "SystemMaxUse=100M" >> /etc/systemd/journald.conf
 
 # start user script
 firstuser="$(getent passwd 1000 | cut -d: -f1)"
