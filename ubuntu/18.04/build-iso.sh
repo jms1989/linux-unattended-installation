@@ -25,7 +25,7 @@ TMP_INITRD_DIR="`mktemp -d`"
 passwdfile=${3:-"$CURRENT_DIR/passwd"}
 
 # download and extract netboot iso
-SOURCE_ISO_URL="http://mirror.lstn.net/ubuntu/dists/bionic/main/installer-amd64/current/images/netboot/mini.iso"
+SOURCE_ISO_URL="http://mirror.lstn.net/ubuntu/dists/bionic-updates/main/installer-amd64/current/images/netboot/mini.iso"
 cd "$TMP_DOWNLOAD_DIR"
 wget -4 "$SOURCE_ISO_URL" -O "./netboot.iso"
 7z x "./netboot.iso" "-o$TMP_DISC_DIR"
