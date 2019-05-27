@@ -26,6 +26,8 @@ Run `sudo apt-get install p7zip-full cpio gzip genisoimage whois pwgen wget fake
 
 Run `sudo apt-get install qemu-utils qemu-kvm` in addition to install software tools required by the `build-disk.sh` script.
 
+Note: If using Ubuntu on the Windows Subsystem for Linux; do `sudo update-alternatives --set fakeroot /usr/bin/fakeroot-tcp` beforehand. Ran into a hickup with fakeroot.
+
 ### Usage
 
 #### Build ISO images
