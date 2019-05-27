@@ -45,6 +45,7 @@ hostname "$hostname"
 apt-get -y update
 apt-get -y -o Dpkg::Options::="--force-confold" upgrade
 apt-get -y autoremove
+apt-get -y install ntpdate
 apt-get -y purge
 #apt-get -y install python3-pip python3-dev
 
@@ -58,7 +59,16 @@ apt-get -y purge
 chmod -x --quiet /etc/update-motd.d/{10..99}* 
 
 # Set timezone
-cp /usr/share/zoneinfo/"{$timezone}" /etc/localtime
+cat <<EOT >> /etc/cron.daily/ntpdate
+#!bin/sh
+ntpdate ntp.ubuntu.com pool.ntp.org
+EOT
+chmod 755 /etc/cron.daily/ntpdate
+
+echo "$timezone" > /etc/timezone
+echo "The timezone is" "$timezone"
+ln -sf /usr/share/zoneinfo/"$timezone" /etc/localtime
+dpkg-reconfigure --frontend noninteractive tzdata
 
 # Reduce log retention rate of journald
 echo "MaxRetentionSec=1day" >> /etc/systemd/journald.conf
