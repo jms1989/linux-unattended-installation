@@ -30,6 +30,14 @@ Note: If using Ubuntu on the Windows Subsystem for Linux; do `sudo update-altern
 
 ### Usage
 
+#### Docker
+
+There is some scripts for building in docker. Tested and works on my Linux Mint host.
+
+Run `build-container.sh` to build a local container if mine doesn't work then adjust the iso builder to use your version.
+
+Run `build-iso.sh` to make the iso. You'll find the iso in the current directory.
+
 #### Build ISO images
 
 You can run the `build-iso.sh` script as regular user. No root permissions required.

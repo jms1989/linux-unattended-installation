@@ -1,0 +1,11 @@
+# doesn't work yet. :(
+version: "3"
+services:
+  build:
+    image: ubuntu-iso-builder
+    volumes:
+      - .:/build
+      - ~/.ssh:/root/.ssh
+    environment:
+      - TZ=America/Chicago
+    command: /build/ubuntu/18.04/build-iso.sh
